@@ -1,6 +1,10 @@
 const express = require("express");
 const server = express();
 const PORT = 3000;
+const pg= require('knex')({
+  client: 'pg',
+  connection: process.env.PG_CONNECION_STRING
+});
 
 const owners = [{
   name: "hello",

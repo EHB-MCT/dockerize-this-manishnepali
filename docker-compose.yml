@@ -1,0 +1,28 @@
+version: "3.9" 
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - pg
+    volumes:
+      - ./api/src:/usr/app/src
+    enviorment:
+      - PG_CONNECTION_SRING=postgress://${POSTGRES_USER}${POSTGRES_PASSWORD}@pg:3000/${POSTGRES_DB}
+
+  pg:
+    image: postgress:latest
+    ports:
+      - 5432:5432
+    enviorment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    volumes:
+      - ./_volumes/pgdata:/var/lib/postgresql/data
+    
+
+  
+    
